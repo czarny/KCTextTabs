@@ -44,7 +44,10 @@
 
     self->_selectionBar = [UIView new];
     self->_selectionBar.backgroundColor = self.tintColor;
+    self->_selectionBar.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self->_selectionBar];
+    NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:_selectionBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:2];
+    [self addConstraint:c];
 
     self.textColor = [UIColor whiteColor];
     self.normalFont = [UIFont systemFontOfSize:12];
