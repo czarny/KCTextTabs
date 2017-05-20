@@ -12,15 +12,23 @@
 
 
 
-@interface ViewController ()
+@interface ViewController () <KCTextTabsViewDelegate>
+
+@property(weak) IBOutlet KCTextTabsView *tabs;
+@property(weak) IBOutlet UILabel *textLabel;
 
 @end
+
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    self.tabs.delegate = self;
+    [self.tabs addButton:@"Test1"];
+    [self.tabs addButton:@"Test2"];
+    [self.tabs addButton:@"Test3"];
 }
 
 
@@ -29,5 +37,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)textTabsView:(KCTextTabsView *)view didSelectTabAtIndex:(NSInteger)index {
+    self.textLabel.text = [NSString stringWithFormat:@"%zd", index];
+}
 
 @end

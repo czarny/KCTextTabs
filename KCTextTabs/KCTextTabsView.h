@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class KCTextTabsView;
+
+@protocol KCTextTabsViewDelegate <NSObject>
+
+- (void)textTabsView:(KCTextTabsView *)view didSelectTabAtIndex:(NSInteger)index;
+
+@end
+
 
 
 IB_DESIGNABLE
@@ -19,9 +27,9 @@ IB_DESIGNABLE
 @property(nonatomic, strong) IBInspectable UIFont *normalFont;
 @property(nonatomic, strong) IBInspectable UIFont *selectedFont;
 
-@property(nonatomic, strong) IBInspectable NSString *tabTitle1;
-@property(nonatomic, strong) IBInspectable NSString *tabTitle2;
-@property(nonatomic, strong) IBInspectable NSString *tabTitle3;
-@property(nonatomic, strong) IBInspectable NSString *tabTitle4;
+@property(nonatomic, assign) NSInteger selectedIndex;
+@property(nonatomic, weak) id<KCTextTabsViewDelegate> delegate;
+
+- (void)addButton:(NSString *)title;
 
 @end
