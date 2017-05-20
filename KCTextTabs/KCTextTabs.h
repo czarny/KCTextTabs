@@ -14,6 +14,6 @@ FOUNDATION_EXPORT double KCTextTabsVersionNumber;
 //! Project version string for KCTextTabs.
 FOUNDATION_EXPORT const unsigned char KCTextTabsVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <KCTextTabs/PublicHeader.h>
+#import <KCTextTabs/KCTextTabsView.h>
 
 

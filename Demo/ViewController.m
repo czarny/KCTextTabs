@@ -8,6 +8,10 @@
 
 #import "ViewController.h"
 
+@import KCTextTabs;
+
+
+
 @interface ViewController ()
 
 @end

@@ -16,7 +16,7 @@
 		49D02EC21ED06127000B7ED6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49D02EC01ED06127000B7ED6 /* LaunchScreen.storyboard */; };
 		49D02EC91ED06144000B7ED6 /* KCTextTabs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D02EA11ED06085000B7ED6 /* KCTextTabs.framework */; };
 		49D02ECA1ED06144000B7ED6 /* KCTextTabs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49D02EA11ED06085000B7ED6 /* KCTextTabs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		49D02ECE1ED061B2000B7ED6 /* KCTextTabsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 49D02ECC1ED061B2000B7ED6 /* KCTextTabsView.h */; };
+		49D02ECE1ED061B2000B7ED6 /* KCTextTabsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 49D02ECC1ED061B2000B7ED6 /* KCTextTabsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49D02ECF1ED061B2000B7ED6 /* KCTextTabsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D02ECD1ED061B2000B7ED6 /* KCTextTabsView.m */; };
 /* End PBXBuildFile section */
 
