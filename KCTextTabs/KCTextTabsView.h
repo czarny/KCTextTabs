@@ -23,7 +23,6 @@ IB_DESIGNABLE
 @interface KCTextTabsView : UIView
 
 @property(nonatomic, assign) IBInspectable UIColor *textColor;
-@property(nonatomic, strong) IBInspectable UIColor *borderColor;
 @property(nonatomic, strong) IBInspectable UIFont *normalFont;
 @property(nonatomic, strong) IBInspectable UIFont *selectedFont;
 

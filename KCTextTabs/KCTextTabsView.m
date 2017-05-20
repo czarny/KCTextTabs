@@ -12,9 +12,6 @@
 
 @interface KCTextTabsView () {
     UIView *_selectionBar;
-    UIView *_topSeparator;
-    UIView *_bottomSeparator;
-
     NSMutableArray *_buttons;
     UIButton *_selectedButton;
 }
@@ -25,11 +22,6 @@
 
 @implementation KCTextTabsView
 
-- (void)setBorderColor:(UIColor *)borderColor {
-    self->_borderColor = borderColor;
-    self->_topSeparator.backgroundColor = borderColor;
-    self->_bottomSeparator.backgroundColor = borderColor;
-}
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     self->_selectedIndex = selectedIndex;
@@ -54,23 +46,7 @@
     self->_selectionBar.backgroundColor = self.tintColor;
     [self addSubview:self->_selectionBar];
 
-    self->_topSeparator = [UIView new];
-    self->_topSeparator.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:self->_topSeparator];
-
-    self->_bottomSeparator = [UIView new];
-    self->_bottomSeparator.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:self->_bottomSeparator];
-
-    NSDictionary *subviews = NSDictionaryOfVariableBindings(_topSeparator, _bottomSeparator);
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_topSeparator]-0-|" options:0 metrics:nil views:subviews]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_topSeparator(1)]" options:0 metrics:nil views:subviews]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_bottomSeparator]-0-|" options:0 metrics:nil views:subviews]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_bottomSeparator(1)]-0-|" options:0 metrics:nil views:subviews]];
-
-
     self.textColor = [UIColor whiteColor];
-    self.borderColor = [UIColor lightGrayColor];
     self.normalFont = [UIFont systemFontOfSize:12];
     self.selectedFont = [UIFont boldSystemFontOfSize:12];
 }
@@ -95,7 +71,7 @@
         x += CGRectGetWidth(b.frame) + space;
     }
 
-    self->_selectionBar.frame = CGRectMake(self->_selectedButton.frame.origin.x, height - 3, self->_selectedButton.frame.size.width, 2);
+    self->_selectionBar.frame = CGRectMake(self->_selectedButton.frame.origin.x, height - 2, self->_selectedButton.frame.size.width, 2);
 }
 
 
