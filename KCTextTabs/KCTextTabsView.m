@@ -11,6 +11,7 @@
 
 
 @interface KCTextTabsView () {
+    UIScrollView *_scrollView;
     UIView *_selectionBar;
     NSMutableArray *_buttons;
     UIButton *_selectedButton;
@@ -42,12 +43,15 @@
 - (void)initialize {
     self->_buttons = [NSMutableArray new];
 
+    self->_scrollView = [UIScrollView new];
+    [self addSubview:self->_scrollView];
+
     self->_selectionBar = [UIView new];
     self->_selectionBar.backgroundColor = self.tintColor;
     self->_selectionBar.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:self->_selectionBar];
-    NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:_selectionBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:2];
-    [self addConstraint:c];
+    [self->_scrollView addSubview:self->_selectionBar];
+//    NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:_selectionBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:2];
+//    [self->_scrollView addConstraint:c];
 
     self.textColor = [UIColor whiteColor];
     self.normalFont = [UIFont systemFontOfSize:12];
@@ -57,23 +61,22 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+
+    self->_scrollView.frame = self.bounds;
     [self->_buttons makeObjectsPerformSelector:@selector(sizeToFit)];
 
     CGFloat width = self.frame.size.width;
     CGFloat height = self.frame.size.height;
-    CGFloat space = width;
-    for(UIButton *b in self->_buttons) {
-        space -= CGRectGetWidth(b.frame) + 4;
-    }
-    space /= self->_buttons.count;
+    CGFloat space = 12.0;
     CGFloat x = 0.5 * space;
     CGFloat y = (height - CGRectGetHeight([[self->_buttons firstObject] frame])) / 2.0;
 
     for(UIButton *b in self->_buttons) {
-        b.frame = CGRectMake(x, y, CGRectGetWidth(b.frame) + 4, CGRectGetHeight(b.frame));
+        b.frame = CGRectMake(x, y, CGRectGetWidth(b.frame) + 6, CGRectGetHeight(b.frame));
         x += CGRectGetWidth(b.frame) + space;
     }
 
+    self->_scrollView.contentSize = CGSizeMake(x, height);
     self->_selectionBar.frame = CGRectMake(self->_selectedButton.frame.origin.x, height - 2, self->_selectedButton.frame.size.width, 2);
 }
 
@@ -117,7 +120,7 @@
     button.tintColor = self.textColor;
     [button setTitle:title forState:UIControlStateNormal];
     [button addTarget:self action:@selector(onButtonTap:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:button];
+    [self->_scrollView addSubview:button];
     [self->_buttons addObject:button];
 
     if(!self->_selectedButton) {
