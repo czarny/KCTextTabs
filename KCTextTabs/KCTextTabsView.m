@@ -26,7 +26,8 @@
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     self->_selectedIndex = selectedIndex;
-
+    UIButton *b = self->_buttons[selectedIndex];
+    [self onButtonTap:b];
 }
 
 
@@ -82,8 +83,17 @@
 
 
 - (void)onButtonTap:(UIButton *)sender {
-    self->_selectedButton = sender;
+    [self selectButton:sender];
 
+    if([self->_delegate respondsToSelector:@selector(textTabsView:didSelectTabAtIndex:)]) {
+        NSInteger index = [self->_buttons indexOfObject:self->_selectedButton];
+        [self->_delegate textTabsView:self didSelectTabAtIndex:index];
+    }
+}
+
+
+- (void)selectButton:(UIButton *)button {
+    self->_selectedButton = button;
     for(UIButton *b in self->_buttons) {
         b.titleLabel.font = self.normalFont;
     }
@@ -104,12 +114,6 @@
             self->_selectionBar.frame = CGRectMake(x, y, width, 2);
         }];
     }];
-
-
-    if([self->_delegate respondsToSelector:@selector(textTabsView:didSelectTabAtIndex:)]) {
-        NSInteger index = [self->_buttons indexOfObject:self->_selectedButton];
-        [self->_delegate textTabsView:self didSelectTabAtIndex:index];
-    }
 }
 
 
