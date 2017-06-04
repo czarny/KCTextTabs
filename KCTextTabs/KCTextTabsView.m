@@ -25,9 +25,12 @@
 
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
-    self->_selectedIndex = selectedIndex;
-    UIButton *b = self->_buttons[selectedIndex];
-    [self onButtonTap:b];
+    NSInteger selected = [self->_buttons indexOfObject:self->_selectedButton];
+    if(selected != selectedIndex) {
+        self->_selectedIndex = selectedIndex;
+        UIButton *b = self->_buttons[selectedIndex];
+        [self onButtonTap:b];
+    }
 }
 
 
@@ -51,8 +54,6 @@
     self->_selectionBar.backgroundColor = self.tintColor;
     self->_selectionBar.translatesAutoresizingMaskIntoConstraints = NO;
     [self->_scrollView addSubview:self->_selectionBar];
-//    NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:_selectionBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:2];
-//    [self->_scrollView addConstraint:c];
 
     self.textColor = [UIColor whiteColor];
     self.normalFont = [UIFont systemFontOfSize:12];
