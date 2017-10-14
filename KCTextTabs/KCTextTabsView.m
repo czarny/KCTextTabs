@@ -48,7 +48,13 @@
     self->_buttons = [NSMutableArray new];
 
     self->_scrollView = [UIScrollView new];
+    self->_scrollView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self->_scrollView];
+
+    [self->_scrollView.leftAnchor constraintEqualToAnchor:self.leftAnchor].active = YES;
+    [self->_scrollView.rightAnchor constraintEqualToAnchor:self.rightAnchor].active = YES;
+    [self->_scrollView.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
+    [self->_scrollView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
 
     self->_selectionBar = [UIView new];
     self->_selectionBar.backgroundColor = self.tintColor;
@@ -63,11 +69,8 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
-    self->_scrollView.frame = self.bounds;
     [self->_buttons makeObjectsPerformSelector:@selector(sizeToFit)];
 
-    CGFloat width = self.frame.size.width;
     CGFloat height = self.frame.size.height;
     CGFloat space = 12.0;
     CGFloat x = 0.5 * space;
